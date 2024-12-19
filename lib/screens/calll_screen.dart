@@ -42,11 +42,20 @@ class CalllScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Call'),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_rounded)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert)),
+        ],
+      ),
       body: ListView.builder(
         itemCount: img.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            leading: CircleAvatar(radius: 20,
+            leading: CircleAvatar(
+              radius: 20,
               backgroundImage: AssetImage(img[index]),
             ),
             title: Text(names[index]),

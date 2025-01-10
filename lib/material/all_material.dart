@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/screens/calll_screen.dart';
 import 'package:myapp/screens/home_screen.dart';
+import 'package:myapp/screens/user_updates.dart';
 
 class MyApp extends StatefulWidget {
   MyApp({super.key});
@@ -27,9 +28,17 @@ class _MyAppState extends State<MyApp> {
       theme:ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
+      initialRoute: 'Chats',
+      routes: {
+        'Chats':(context)=> MyHomePage(),
+        'Updates':(context)=> UserUpdates(),
+        'Calls':(context)=> CalllScreen(),
+      },
       home: 
-      CalllScreen(),
-      // MyHomePage(toggleTheme: _toggletheme),
+      // CalllScreen(),
+      MyHomePage(),
+      // ChatList(),
+      // UserUpdates()
     );
   }
 }

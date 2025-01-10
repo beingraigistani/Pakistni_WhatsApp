@@ -14,7 +14,7 @@ class ChatList extends StatelessWidget {
     'assets/images/dp7.jpg',
     'assets/images/dp4.jpg',
   ];
-  List<String> names = [
+  final List<String> names = [
     'adnan',
     'Shahzad',
     'Zubair',
@@ -26,7 +26,7 @@ class ChatList extends StatelessWidget {
     'Haroon',
     'Danial',
   ];
-  List<String> text = [
+  final List<String> text = [
     'hi',
     'kese ho',
     'kaha ho',
@@ -38,7 +38,7 @@ class ChatList extends StatelessWidget {
     'kaam kr lo pehle apna ',
     'Danial hu mai',
   ];
-  List<String> time = [
+  final List<String> time = [
     '2:22 pm',
     '1:50 pm',
     '12:32 pm',
@@ -54,42 +54,95 @@ class ChatList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-          //  Text('Chatlist')
-          ListView.builder(
-              itemCount: img.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage: AssetImage(img[index]),
-                        // backgroundColor: Colors.grey,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            names[index],
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          Text(text[index]),
-                        ],
-                      ),
-                      Spacer(),
-                      Text(time[index])
-                    ],
-                  ),
-                );
-              }),
+      body: ListView.builder(
+          itemCount: img.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              width: double.infinity,
+              height: 65,
+              // padding: EdgeInsets.all(8),
+              child: ChatWidget(
+                  img: img[index],
+                  names: names[index],
+                  text: text[index],
+                  time: time[index]),
+            );
+            // Padding(
+            // padding: const EdgeInsets.all(8.0),
+            //   child: Row(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       CircleAvatar(
+            //         radius: 20,
+            //         backgroundImage: AssetImage(img[index]),
+            //       ),
+            //       SizedBox(
+            //         width: 20,
+            //       ),
+            //       Column(
+            //         mainAxisAlignment: MainAxisAlignment.start,
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Text(
+            //             names[index],
+            //             style: TextStyle(
+            //                 fontSize: 20, fontWeight: FontWeight.bold),
+            //           ),
+            //           Text(text[index]),
+            //         ],
+            //       ),
+            //       Spacer(),
+            //       Text(time[index])
+            //     ],
+            //   ),
+            // );
+          }),
     );
+  }
+}
+
+class ChatWidget extends StatelessWidget {
+  ChatWidget(
+      {super.key,
+      required this.img,
+      required this.names,
+      required this.text,
+      required this.time});
+  final String img;
+  final String names;
+  final String text;
+  final String time;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            radius: 20,
+            backgroundImage: AssetImage(img),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                names,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Text(text),
+            ],
+          ),
+          Spacer(),
+          Text(time)
+        ],
+      ),
+    ));
   }
 }

@@ -1,88 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/chat_list.dart';
+import 'package:myapp/screens/calll_screen.dart';
+import 'package:myapp/screens/chat_screen.dart';
+import 'package:myapp/screens/community_screen.dart';
+import 'package:myapp/screens/user_updates.dart';
 
-class MyHomePage extends StatelessWidget {
-  final VoidCallback toggleTheme;
-  MyHomePage({super.key, required this.toggleTheme});
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int myindex = 0;
+
+  List<Widget> AllScreens = [
+    ChatScreen(),
+    UserUpdates(),
+    CommunityScreen(),
+    CalllScreen()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Pakistani WhatsApp',
-          style: TextStyle(color: Colors.green, fontSize: 15),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.camera_alt_rounded),
-          ),
-          IconButton(
-            onPressed: 
-              toggleTheme
-            ,
-            icon: const Icon(Icons.more_vert),
-          )
+      body: AllScreens[myindex],
+      //  ChatScreen(),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) => setState(() {
+          myindex = index;
+        }),
+        currentIndex: myindex,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chats"),
+          BottomNavigationBarItem(icon: Icon(Icons.update), label: "Updates"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.group_add_rounded), label: "Communities"),
+          BottomNavigationBarItem(icon: Icon(Icons.call), label: "Calls"),
         ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                    fillColor: Color(0x80f6f5f3),
-                    filled: true,
-                    hintText: 'Ask Meta AI or Search'),
-              ),
-            ),
-            SizedBox(width: double.infinity, height: 500, child: ChatList()),
-            // Text('Text after ChatList'),
-            // Text('Text after ChatList'),
-            // Text('Text after ChatList'),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: [
-            Column(
-              children: [
-                ElevatedButton(onPressed: () {}, child: Icon(Icons.chat)),
-                Text('Chats')
-              ],
-            ),
-            Spacer(),
-            Column(
-              children: [
-                ElevatedButton(onPressed: () {}, child: Icon(Icons.update)),
-                Text('Updates')
-              ],
-            ),
-            Spacer(),
-            Column(
-              children: [
-                ElevatedButton(onPressed: () {}, child: Icon(Icons.group)),
-                Text('Communities')
-              ],
-            ),
-            Spacer(),
-            Column(
-              children: [
-                ElevatedButton(onPressed: () {}, child: Icon(Icons.call)),
-                Text('Calls')
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
